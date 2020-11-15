@@ -1,0 +1,6 @@
+{
+    "host":"localhost",
+    "user":"hackumbc-db",
+    "password":"hackumbc",
+    "database":"connecteach"
+}
