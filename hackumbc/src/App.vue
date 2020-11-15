@@ -1,26 +1,12 @@
 <template>
   <div id="app">
+    
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <!-- <Home /> -->
     <router-view></router-view>
-    <!-- <script>
-      window.watsonAssistantChatOptions = {
-        integrationID: "74dc62fe-fbe9-4f02-bc5f-17c1e94fb362", // The ID of this integration.
-        region: "us-south", // The region your integration is hosted in.
-        serviceInstanceID: "33c60881-55ab-4a94-b793-f77d2e7a2a85", // The ID of your service instance.
-        onLoad: function (instance) {
-          instance.render();
-        },
-      };
-      setTimeout(function () {
-        const t = document.createElement("script");
-        t.src =
-          "https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
-        document.head.appendChild(t);
-      });
-      
-    </script> -->
+
   </div>
+
 </template>
 
 <script>
@@ -40,11 +26,12 @@ setTimeout(function () {
   document.head.appendChild(t);
 });
 
+
 export default {
   name: "App",
   components: {
     // Home
-  },
+  }
 };
 </script>
 

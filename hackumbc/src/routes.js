@@ -2,6 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from './components/Home'
 import LoginComponent from './components/LoginComponent'
+import loginpro from './components/loginpro'
+import tutor from './components/tutor'
+import register from './components/register'
+import forgetpassword from './components/forgetpassword'
 
 
 Vue.use(VueRouter);
@@ -10,13 +14,33 @@ Vue.use(VueRouter);
 const routes = [
     {
         path:'/',
-        name: 'Home',
+        name: '/',
         component: Home
     },
     {
         path:'/login',
         name: "login",
         component: LoginComponent
+    },
+    {
+        path:'/loginpro',
+        name: "loginpro",
+        component: loginpro
+    },
+    {
+        path:'/tutor',
+        name: "tutor",
+        component: tutor
+    },
+    {
+        path:'/register',
+        name: "register",
+        component: register
+    },
+    {
+        path:'/forgetpassword',
+        name: "forgetpassword",
+        component: forgetpassword
     }
 ]
 
