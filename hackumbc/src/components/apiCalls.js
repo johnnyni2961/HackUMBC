@@ -29,15 +29,16 @@ export function loginChecker() {
 }
 
 export function getUserByUsername(username) {
-    //var toReturn;
+    var toReturn;
     $.ajax({
         url: "http://localhost:8090/users/name/",
         data: {username},
         async: false,
         success: (res) => {
-            console.log(res);
+            toReturn = res;
         }
     });
+    return toReturn;
 }
 
 export function signOut() {
@@ -51,4 +52,12 @@ export function signOut() {
             console.log(res);
         }
     });
+}
+
+export const getUser = () => getCookies().sessionID.split("-")[1];
+
+export function displayName() {
+    const user = getUserByUsername(getUser());
+
+    return `${user.fname} ${user.lname}`;
 }

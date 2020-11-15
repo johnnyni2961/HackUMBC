@@ -1,68 +1,180 @@
 <template>
-    <div class="bg-gradient-primary">
-    <div class="container">
+    <div v-if="!loginChecker()">
+        <div class="bg-gradient-primary">
+        <div class="container">
 
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
+            <!-- Outer Row -->
+            <div class="row justify-content-center">
 
-            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="col-xl-10 col-lg-12 col-md-9">
 
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                                    </div>
-                                    <form class="user">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                    <div class="card o-hidden border-0 shadow-lg my-5">
+                        <div class="card-body p-0">
+                            <!-- Nested Row within Card Body -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="p-5">
+                                        <div class="text-center">
+                                            <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                         </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
+                                        <form id="loginForm" class="user" action="#">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control form-control-user"
+                                                    name="username" aria-describedby="emailHelp"
+                                                    placeholder="Username">
                                             </div>
-                                        </div>
-                                      <router-link :to="{ path: '/' }"><a class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a></router-link>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control form-control-user"
+                                                    name="password" placeholder="Password">
+                                            </div>
+                                        <input type="submit" @click="login" class="btn btn-primary btn-user btn-block" value="Login" />
+                                        </form>
                                         <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
-                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                        </a>
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                        <div class="text-center">
+                                            <router-link class="small" :to="{ path: '/register'}">Create an Account!</router-link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
             </div>
 
         </div>
-
-    </div>
+        </div>
     </div>
 </template>
+
+<script>
+import * as api from './apiCalls';
+
+import router from "../routes";
+
+if(api.loginChecker()) router.push({path:"/"});
+
+import $ from "jquery";
+
+/*
+const register = (event) => {
+  event.preventDefault();
+  if(api.getUserByUsername($("#usernameR")[0].value).username) {
+    alert("That username is already taken!");
+    return;
+  }
+  const val = id => $(id)[0].value
+  const empty = id => val(id) ? true : false;
+  if(!["#usernameR", "#fname","#lname","#passwordR"].reduce((p,c)=>p&&empty(c),true)) {
+    alert("You have to complete all fields!");
+    return;
+  }
+  if(val("#fname").length > 40 || val("#lname").length > 40) {
+    alert("First/last name cannot be >40 characters");
+    return;
+  }
+  if(val("#usernameR").length < 3 || val("#usernameR").length > 32) {
+    alert("Username must be between 3 and 32 characters");
+    return;
+  }
+  if(val("#passwordR").length < 6) {
+    alert("Password must be >=6 characters");
+    return;
+  }
+  if(val("#passwordR") != val("#passwordConfirm")) {
+    alert("Passwords must match");
+    return;
+  }
+  registerQuery({
+    username: val("#usernameR"),
+    fname: val("#fname"),
+    lname: val("#lname"),
+    password: val("#passwordR"),
+    type: val("#role")
+  });
+}
+
+const registerQuery = (dat) => {
+  
+  $.post({
+    url: "http://localhost:8090/users/name",
+    data: JSON.stringify(dat),
+    processData: false,
+    contentType: "application/json",
+    cache: false,
+    timeout: 80000,
+    xhrFields: {
+      withCredentials: true,
+    },
+    complete: (res) => {
+      if(res.status == 201) {
+        router.push("/");
+      } else {
+        alert("An error occurred during account creation.");
+      }
+    },
+    error: (e) => {
+      console.log(e);
+    },
+  })
+  
+
+}
+*/
+
+const login = (event) => {
+  event.preventDefault();
+  loginQuery();
+};
+
+const loginQuery = () => {
+  var form = $("#loginForm")[0];
+  var data = {};
+  var fd = new FormData(form);
+  fd.forEach((v, k) => (data[k] = v));
+
+  // $("#loginsubmit").prop("disabled", true);
+  $.post({
+    url: "http://localhost:8090/users/login",
+    data: JSON.stringify(data),
+    processData: false,
+    contentType: "application/json",
+    cache: false,
+    timeout: 80000,
+    xhrFields: {
+      withCredentials: true,
+    },
+    complete: (res) => {
+      if(res.status == 401) {
+        alert("Incorrect username/password!");
+      } else if(res.status == 200) {
+        router.push("/");
+      }
+    },
+    error: (e) => {
+      console.log(e);
+    },
+  });
+};
+
+export default {
+  name: "LoginComponent",
+  data() {
+    return {
+        router
+    }
+  },
+  methods: {
+    login,
+    loginQuery,
+    //register,
+    ...api,
+    signOut: () => {
+      api.signOut();
+      router.go(0);
+    }
+  }
+};
+</script>
 

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from './components/Home'
-import LoginComponent from './components/LoginComponent'
 import loginpro from './components/loginpro'
 import tutor from './components/tutor'
 import register from './components/register'
@@ -16,11 +15,6 @@ const routes = [
         path:'/',
         name: '/',
         component: Home
-    },
-    {
-        path:'/login',
-        name: "login",
-        component: LoginComponent
     },
     {
         path:'/loginpro',
@@ -46,7 +40,6 @@ const routes = [
 
 const router = new VueRouter({
     mode: 'history',
-    // base: ProcessingInstruction.env.BASE_URL, this seems unnecessary? i can't quite tell
     routes
 })
 
