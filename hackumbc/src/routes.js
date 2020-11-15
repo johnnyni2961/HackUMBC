@@ -4,8 +4,6 @@ import Home from './components/Home'
 import loginpro from './components/loginpro'
 import tutor from './components/tutor'
 import register from './components/register'
-import forgetpassword from './components/forgetpassword'
-
 
 Vue.use(VueRouter);
 
@@ -30,11 +28,6 @@ const routes = [
         path:'/register',
         name: "register",
         component: register
-    },
-    {
-        path:'/forgetpassword',
-        name: "forgetpassword",
-        component: forgetpassword
     }
 ]
 

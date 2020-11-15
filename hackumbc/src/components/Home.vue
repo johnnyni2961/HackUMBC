@@ -29,9 +29,9 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <router-link :to="{ name: 'tutor' }"><a class="nav-link" href="tables.html">
+                <router-link :to="{ name: 'tutor' }" class="nav-link">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tutor</span></a></router-link>
+                    <span>Tutor</span></router-link>
             </li>
 
             <!-- Divider -->
@@ -118,7 +118,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Welcome to Connecteach</h1>
                     </div>
 
                     <!-- Content Row -->
@@ -131,36 +131,37 @@
                             <!-- Illustrations -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">How it works (for students)</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                            src="img/undraw_posting_photo.svg" alt="">
-                                    </div>
-                                    <p>Add some quality, svg illustrations to your project courtesy of <a
-                                            target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                                        constantly updated collection of beautiful svg images that you can use
-                                        completely free and without attribution!</p>
-                                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                                        unDraw &rarr;</a>
+                                    <p>Connecteach is simple to use: all you need to do as a student is provide some basic information about yourself like your grade and subjects of interest via your <router-link :to="{path:`${loginChecker() ? '/user/@' + getUser() : '/login'}`}">profile</router-link>.
+                                    Then, when you want to find a tutor, you can filter a list of possible tutors by those areas of interest!</p>
                                 </div>
                             </div>
 
                             <!-- Approach -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">How it works (for tutors)</h6>
                                 </div>
                                 <div class="card-body">
-                                    <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                                        CSS bloat and poor page performance. Custom CSS classes are used to create
-                                        custom components and custom utility classes.</p>
-                                    <p class="mb-0">Before working with this theme, you should become familiar with the
-                                        Bootstrap framework, especially the utility classes.</p>
+                                    <p>Just like for students, to get started with Connecteach, you'll need to head to your <router-link :to="{path:`${loginChecker() ? '/user/@' + getUser() : '/login'}`}">profile</router-link>
+                                    and list off some keywords relevant to your experience. For example, say you're great in your high school math classes. You might list these tags for yourself:</p>
+                                    <p class="mb-0"><kbd>math</kbd> <kbd>calculus</kbd> <kbd>algebra</kbd> <kbd>algebra</kbd> <kbd>k12</kbd></p><br>
+                                    <p class="mb-0">You'll also want to list an email address for yourself. That way, interested students can find a way to contact you! Finally, you can include a brief description of yourself and your teaching style. Make yourself stand out!</p>
                                 </div>
                             </div>
+                        </div>
 
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Search tutors</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p>Honk!</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -191,26 +192,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
   </div>
 </template>
@@ -218,8 +199,6 @@
 <script>
 import router from '../routes';
 import * as api from './apiCalls';
-
-
 
 export default {
   name: "Home",

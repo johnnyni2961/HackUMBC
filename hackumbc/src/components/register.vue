@@ -85,11 +85,11 @@
 </template>
 
 <script>
-import * as api from "./apiCalls";
-
 import router from "../routes";
 
-if (api.loginChecker()) router.push({ path: "/" });
+import * as api from "./apiCalls";
+
+// if (api.loginChecker()) router.push({ path: "/" });
 
 import $ from "jquery";
 
@@ -146,7 +146,7 @@ const registerQuery = (dat) => {
     xhrFields: {
       withCredentials: true,
     },
-    complete: (res) => {
+    complete: function (res) {
       if (res.status == 201) {
         router.push("/");
       } else {

@@ -3,29 +3,18 @@
             <!-- Page Wrapper -->
     <div id="wrapper">
 
-                <!-- Sidebar -->
+                 <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <router-link :to="{ path: '/' }">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <router-link :to="{ path: '/' }" class="sidebar-brand d-flex align-items-center justify-content-center">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Connect Each</div>
-            </a></router-link>
+                <div class="sidebar-brand-text mx-3">Connecteach</div>
+            </router-link>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                  <router-link :to="{ path: '/' }">
-                <a class="nav-link">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-                  </router-link>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -36,41 +25,18 @@
             </div> -->
 
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Profile</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <router-link :to="{ name: 'loginpro' }"><a class="collapse-item">Login</a></router-link>
-                        
-                        
-                         <router-link :to="{ path: 'register' }"><a class="collapse-item">Register</a></router-link>
-                         <router-link :to="{ path: 'forgetpassword' }"><a class="collapse-item">Forgot Password</a></router-link>
-                        
-                    </div>
-                </div>
-            </li>
 
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <router-link :to="{ name: 'tutor' }"><a class="nav-link" href="tables.html">
+                <router-link :to="{ name: 'tutor' }" class="nav-link">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tutor</span></a></router-link>
+                    <span>Tutor</span></router-link>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
 
 
 
@@ -293,15 +259,15 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                    <h1 class="h3 mb-2 text-gray-800">Tutor Directory</h1>
+                   <!--  <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                         For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
-
+                            href="https://datatables.net">official DataTables documentation</a>.</p> -->
+                            
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                          <!--   <h6 class="m-0 font-weight-bold text-primary">Tutor Directory List</h6> -->
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
