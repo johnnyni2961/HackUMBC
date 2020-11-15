@@ -7,11 +7,10 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <router-link :to="{ path: '/' }" class="sidebar-brand d-flex align-items-center justify-content-center">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+            <router-link :to="{ path: '/' }" class="sidebar-brand d-flex align-items-center">
+                <div class="sidebar-brand-icon">
+                    <img src="../assets/Connect_Each_Cropped.png" />
                 </div>
-                <div class="sidebar-brand-text mx-3">Connecteach</div>
             </router-link>
 
 
@@ -28,11 +27,6 @@
 
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <router-link :to="{ name: 'tutor' }" class="nav-link">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tutor</span></router-link>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -134,7 +128,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">How it works (for students)</h6>
                                 </div>
                                 <div class="card-body">
-                                    <p>Connecteach is simple to use: all you need to do as a student is provide some basic information about yourself like your grade and subjects of interest via your <router-link :to="{path:`${loginChecker() ? '/user/@' + getUser() : '/login'}`}">profile</router-link>.
+                                    <p>Connecteach is simple to use: all you need to do as a student is provide some basic information about yourself like your grade and subjects of interest via your <router-link :to="{path:`${loginChecker() ? '/user/@' + getUser() : '/loginpro'}`}">profile</router-link>.
                                     Then, when you want to find a tutor, you can filter a list of possible tutors by those areas of interest!</p>
                                 </div>
                             </div>
@@ -145,7 +139,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">How it works (for tutors)</h6>
                                 </div>
                                 <div class="card-body">
-                                    <p>Just like for students, to get started with Connecteach, you'll need to head to your <router-link :to="{path:`${loginChecker() ? '/user/@' + getUser() : '/login'}`}">profile</router-link>
+                                    <p>Just like for students, to get started with Connecteach, you'll need to head to your <router-link :to="{path:`${loginChecker() ? '/user/@' + getUser() : '/loginpro'}`}">profile</router-link>
                                     and list off some keywords relevant to your experience. For example, say you're great in your high school math classes. You might list these tags for yourself:</p>
                                     <p class="mb-0"><kbd>math</kbd> <kbd>calculus</kbd> <kbd>algebra</kbd> <kbd>algebra</kbd> <kbd>k12</kbd></p><br>
                                     <p class="mb-0">You'll also want to list an email address for yourself. That way, interested students can find a way to contact you! Finally, you can include a brief description of yourself and your teaching style. Make yourself stand out!</p>
@@ -159,7 +153,19 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Search tutors</h6>
                                 </div>
                                 <div class="card-body">
-                                    <p>Honk!</p>
+                                    <input type="text" id="tagFilter" placeholder="Find some tags (separate by spaces)" class="form-control"/>
+                                    <table>
+                                        <tr>
+                                            <th>Tutor Name</th>
+                                            <th>Username</th>
+                                            <th>Profile</th>
+                                        </tr>
+                                        <tr v-for="tutor in tutors" v-bind:key="tutor.username">
+                                            <td>{{ `${tutor.fname} ${tutor.lname}` }}</td>
+                                            <td>{{ tutor.username }}</td>
+                                            <td><router-link :to="{path: `/user/@${tutor.username}`}">Profile</router-link></td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -200,11 +206,14 @@
 import router from '../routes';
 import * as api from './apiCalls';
 
+import $ from 'jquery';
+
 export default {
   name: "Home",
   data() {
     return {
-      componentKey:0,
+      filterKey: $('#tagFilter')[0].value,
+      tutors: api.allUserProfiles()
     };
   },
   methods: {
@@ -212,6 +221,9 @@ export default {
     signOut: () => {
       api.signOut();
       router.go(0);
+    },
+    filteredList: function(list) {
+        return list.filter((val) => document.getElementById("tagFilter").value.split(" ").reduce((p,c)=>p&&val.tags.split(" ").includes(c),true));
     }
   }
 };

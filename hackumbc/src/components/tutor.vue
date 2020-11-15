@@ -275,28 +275,28 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Position</th>
+                                            <th>Subject</th>
                                             <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Phone Number</th>
+                                            <th>Email</th>
+                                            <th>Video Chat URL</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Subject</th>
+                                            <th>Office Hour</th>
+                                            <th>Phone Number</th>
+                                            <th>Email</th>
+                                            <th>Video Chat URL</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <tr>
                                             <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
+                                            <td>Math, English, Science</td>
+                                            <td>8:00 AM</td>
                                             <td>61</td>
                                             <td>2011/04/25</td>
                                             <td>$320,800</td>

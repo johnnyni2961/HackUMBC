@@ -41,6 +41,31 @@ export function getUserByUsername(username) {
     return toReturn;
 }
 
+export function getUserProfile(username) {
+    var toReturn;
+    $.ajax({
+        url: "http://localhost:8090/users/properties/",
+        data: {username},
+        async: false,
+        success: (res) => {
+            toReturn = res;
+        }
+    });
+    return toReturn;
+}
+
+export function allUserProfiles() {
+    var toReturn;
+    $.get({
+        url: "http://localhost:8090/users/all-properties/",
+        async: false,
+        success: (res) => {
+            toReturn = res;
+        }
+    });
+    return toReturn;
+}
+
 export function signOut() {
     $.post({
         url:"http://localhost:8090/users/logout",
@@ -54,7 +79,7 @@ export function signOut() {
     });
 }
 
-export const getUser = () => getCookies().sessionID.split("-")[1];
+export const getUser = () => { if(!loginChecker()) return; return getCookies().sessionID.split("-")[1]; };
 
 export function displayName() {
     const user = getUserByUsername(getUser());

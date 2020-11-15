@@ -3,6 +3,7 @@ const router = express.Router();
 const sqlQuery = require('./db');
 const mysql = require('mysql2');
 const validate = require('./validate');
+const e = require('express');
 const sha256 = require('js-sha256').sha256;
 
 //TODO: authenticate requests? 
@@ -19,6 +20,24 @@ router.get('/name', function(req,res) {
         }
         
     });
+});
+
+router.get('/all-properties', function(req,res) {
+    sqlQuery(`select * from properties`, (err, results) => {
+        if(err) throw err;
+        res.send(results);
+    });
+})
+
+router.get('/properties', function(req,res) {
+    sqlQuery(`select * from properties where username=${mysql.escape(req.query.username)}`, (err,results) => {
+        if(err) throw err;
+        if(results.length > 0) {
+            res.send(results[0]);
+        } else {
+            res.send({});
+        }
+    })
 });
 
 router.get('/authenticate', function(req,res,next) {

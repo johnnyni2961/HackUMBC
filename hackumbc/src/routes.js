@@ -4,6 +4,7 @@ import Home from './components/Home'
 import loginpro from './components/loginpro'
 import tutor from './components/tutor'
 import register from './components/register'
+import UserPage from './components/UserPage'
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,11 @@ const routes = [
         path:'/register',
         name: "register",
         component: register
+    },
+    {
+        path:'/user/@:username',
+        name:'user',
+        component: UserPage
     }
 ]
 
