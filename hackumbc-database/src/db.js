@@ -11,13 +11,14 @@ function sqlQuery(query, params, callback) {
         host,user,password,database
     });
     connection.connect(err => {if (err) throw err});
-
-    connection.query(query, params, (err, results) => {
+    
+    connection.query(query, params, (err, results, fields) => {
         connection.end();
-        if(err) throw err;
+            // if(err) throw err;
 
-        callback(err, results);
+        callback(err, results, fields);
     });
+
 }
 
 module.exports = sqlQuery;

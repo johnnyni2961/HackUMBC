@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import Home from './components/Home'
 import LoginComponent from './components/LoginComponent'
 import tutor from './components/tutor'
-import register from './components/register'
 import subject from './components/subject'
 import tutorsignin from './components/tutor-signin'
 import tutorsignup from './components/tutor-signup'
@@ -14,7 +13,7 @@ Vue.use(VueRouter);
 const routes = [
     {
         path:'/',
-        name: 'Home',
+        name: '/',
         component: Home
     },
     {
@@ -26,11 +25,6 @@ const routes = [
         path: '/tutor',
         name: "tutor",
         component: tutor
-    },
-    {
-        path: '/register',
-        name: "register",
-        component: register
     },
     {
         path: '/subject',

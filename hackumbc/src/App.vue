@@ -41,6 +41,7 @@ setTimeout(function () {
   document.head.appendChild(t);
 });
 
+
 export default {
   name: "App",
   components: {
