@@ -4,8 +4,7 @@ import Home from './components/Home'
 import LoginComponent from './components/LoginComponent'
 import tutor from './components/tutor'
 import subject from './components/subject'
-import tutorsignin from './components/tutor-signin'
-import tutorsignup from './components/tutor-signup'
+import UserPage from './components/UserPage'
 
 Vue.use(VueRouter);
 
@@ -32,14 +31,9 @@ const routes = [
         component: subject
     },
     {
-        path: '/tutor-signin',
-        name: "tutorsignin",
-        component: tutorsignin
-    },
-    {
-        path: '/tutor-signup',
-        name: "tutorsignup",
-        component: tutorsignup
+        path: '/user/@:username',
+        name: 'user',
+        component: UserPage
     }
 ]
 

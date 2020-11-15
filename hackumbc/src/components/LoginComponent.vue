@@ -20,31 +20,33 @@
             />
           </form>
         </td>
+        
         <td>
           <form action="#" id="registerForm">
             <label for="usernameR">Username:</label
-            ><input ref="usernameR" type="text" /><br />
+            ><input id="usernameR" type="text" /><br />
             <label for="fname">First name:</label
-            ><input ref="fname" type="text" /><br />
+            ><input id="fname" type="text" /><br />
             <label for="lname">Last name:</label
-            ><input ref="lname" type="text" /><br />
+            ><input id="lname" type="text" /><br />
             <label for="role">Desired role:</label>
-            <!--
-            <select ref="role">
+            
+            <select id="role">
               <option value="user">User</option>
               <option value="tutor">Tutor</option></select
-            > --> <br />
+            ><br />
             <label for="passwordR">Password:</label
-            ><input ref="passwordR" type="password" /><br />
+            ><input id="passwordR" type="password" /><br />
             <label for="passwordConfirm">Confirm password:</label
-            ><input ref="passwordConfirm" type="password" /><br/>
+            ><input id="passwordConfirm" type="password" /><br/>
             <input type="submit" value="Submit" @click="register" id="registersubmit"/>
           </form>
         </td>
+        
       </tr>
     </table>
     <div v-else>
-      <h2>You are already logged in! <router-link :to="{name: '/'}">Go home</router-link></h2>
+      <h2>You are already logged in! <router-link :to="{name: '/'}">Go home</router-link>/<a href="#" @click="signOut">Sign out</a></h2>
     </div>
   </div>
 </template>
@@ -57,32 +59,65 @@ import $ from "jquery";
 
 const register = (event) => {
   event.preventDefault();
-  registerQuery();
+  if(api.getUserByUsername($("#usernameR")[0].value).username) {
+    alert("That username is already taken!");
+    return;
+  }
+  const val = id => $(id)[0].value
+  const empty = id => val(id) ? true : false;
+  if(!["#usernameR", "#fname","#lname","#passwordR"].reduce((p,c)=>p&&empty(c),true)) {
+    alert("You have to complete all fields!");
+    return;
+  }
+  if(val("#fname").length > 40 || val("#lname").length > 40) {
+    alert("First/last name cannot be >40 characters");
+    return;
+  }
+  if(val("#usernameR").length < 3 || val("#usernameR").length > 32) {
+    alert("Username must be between 3 and 32 characters");
+    return;
+  }
+  if(val("#passwordR").length < 6) {
+    alert("Password must be >=6 characters");
+    return;
+  }
+  if(val("#passwordR") != val("#passwordConfirm")) {
+    alert("Passwords must match");
+    return;
+  }
+  registerQuery({
+    username: val("#usernameR"),
+    fname: val("#fname"),
+    lname: val("#lname"),
+    password: val("#passwordR"),
+    type: val("#role")
+  });
 }
 
-const registerQuery = () => {
-  var form = $("#registerForm")[0];
-  var data = new FormData(form);
-  console.log(data.entries());
-  `
+const registerQuery = (dat) => {
+  
   $.post({
     url: "http://localhost:8090/users/name",
-    data: JSON.stringify(data),
+    data: JSON.stringify(dat),
     processData: false,
     contentType: "application/json",
     cache: false,
     timeout: 80000,
-    /*xhrFields: {
+    xhrFields: {
       withCredentials: true,
-    }*/
-    success: () => {
-      router.push("/");
+    },
+    complete: (res) => {
+      if(res.status == 201) {
+        router.push("/");
+      } else {
+        alert("An error occurred during account creation.");
+      }
     },
     error: (e) => {
       console.log(e);
     },
   })
-  `
+  
 
 }
 
@@ -108,8 +143,12 @@ const loginQuery = () => {
     xhrFields: {
       withCredentials: true,
     },
-    success: () => {
-      router.push("/");
+    complete: (res) => {
+      if(res.status == 401) {
+        alert("Incorrect username/password!");
+      } else if(res.status == 200) {
+        router.push("/");
+      }
     },
     error: (e) => {
       console.log(e);
@@ -123,7 +162,11 @@ export default {
     login,
     loginQuery,
     register,
-    loginChecker: api.loginChecker
+    ...api,
+    signOut: () => {
+      api.signOut();
+      router.go(0);
+    }
   }
 };
 </script>

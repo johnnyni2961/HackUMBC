@@ -24,11 +24,11 @@ function registerSchema(req, res, next) {
 
 
     const schema = Joi.object({
-        firstName: Joi.string().required().max(40),
-        lastName: Joi.string().max(40).required(),
+        fname: Joi.string().required().max(40),
+        lname: Joi.string().max(40).required(),
         username: Joi.string().required().min(3).max(32),
         password: Joi.string().min(6).required(),
-        userType: Joi.number().min(0).max(2).required()
+        type: Joi.string().required()
     });
     validateSchema(req, next, schema);
 

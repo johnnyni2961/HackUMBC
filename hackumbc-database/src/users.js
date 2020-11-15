@@ -11,8 +11,13 @@ const sha256 = require('js-sha256').sha256;
 router.get('/name', function(req,res) {
     sqlQuery(`select * from users where ?`, {username:req.query.username}, (err, results) => {
         if (err) throw err;
-        let {id, passhash, ...tosend} = results[0];
-        res.send(tosend);
+        if(results.length > 0) {
+            let {id, passhash, ...tosend} = results[0];
+            res.send(tosend);
+        } else {
+            res.send({});
+        }
+        
     });
 });
 
@@ -44,15 +49,15 @@ router.post('/login', validate.authSchema, function(req,res,next) {
 })
 
 router.post('/name', validate.registerSchema, function(req, res, next) {
-    console.log(req.body);
-    var { username, password, firstName, lastName, type } = req.body;
+    var { username, password, fname, lname, type } = req.body;
     try {
         sqlQuery(`insert into users(username,passhash,fname,lname,type) values (${mysql.escape(username)}, sha2(${mysql.escape(password)}, 256), ${mysql.escape(fname)}, ${mysql.escape(lname)}, ${mysql.escape(type)})`, (err, results) => {
-            console.log(err);
-            res.status(201).send({ "message": "OK", "id" : null, "hash" : null});
+            sqlQuery(`select * from users where username=${mysql.escape(username)}`, (err,results) => {
+                res.cookie("sessionID", sha256(results[0].id + username)+`-${username}`).sendStatus(201);
+            });
         });
     } catch (err) {
-        switch(err.errno) {
+        switch(err.errno) { 
             case 1062:
                 res.status(409).send({ "message": "Duplicate username" });
                 break
